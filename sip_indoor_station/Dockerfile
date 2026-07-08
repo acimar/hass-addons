@@ -20,7 +20,6 @@ RUN apk add --no-cache \
 WORKDIR /app
 COPY sip-indoor-station/ /app/sip-indoor-station/
 
-RUN pip3 install --break-system-packages "onvif-zeep>=0.2.12"
 RUN pip3 install --break-system-packages --no-deps /app/sip-indoor-station
 
 COPY run.sh /run.sh
