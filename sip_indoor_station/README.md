@@ -17,13 +17,19 @@ This add-on contains three parts:
 - WebRTC transceiver with HTTP API for communication with client (integration and custom door station card). 
 - optional calls history
 
+Tested door stations:
+
+- HikVision DS-KV6113-WPE1(B) firmware 2.2.53
+- Dahua VTO2211G-WP-S2
+- DNAKE C112
+
 Minimal configuration:
 
 - `local_address`: Home Assistant host LAN address advertised in SIP/SDP and used as the first WebRTC host ICE candidate, for example `192.168.0.123`
 - `webrtc_ice_candidates`: comma-separated host or host:port values to prepend as WebRTC host ICE candidates
 - `call_history_enabled`: store recent calls in add-on SQLite storage. Enabled by default.
 - `call_history_days`: number of days to keep call history. Defaults to `30`.
-- `door_station_vendor`: required when API is enabled. Use `hikvision` (snapshots + maintenance + open door) or `dahua` (snapshots + open door).
+- `door_station_vendor`: required when API is enabled. Use `hikvision` (snapshots + maintenance + open door), `dahua` (snapshots + open door), or `dnake` (snapshots + open door).
 
 The add-on always uses internal WebRTC ICE UDP port `8556`; use `host:port` in `webrtc_ice_candidates` when advertising a different public forwarded port.
 
@@ -57,7 +63,7 @@ For remote access, configure TURN and set:
 webrtc_ice_transport_policy: relay
 ```
 
-API support is optional and disabled by default. Enable it only if local API access is enabled on the device. Door opening and snapshots are supported for both HikVision and Dahua. Reboot is supported only for HikVision.
+API support is optional and disabled by default. Enable it only if local API access is enabled on the device. Door opening is supported for HikVision, Dahua, and DNAKE. Snapshots are supported for HikVision, Dahua, and DNAKE devices with ONVIF snapshot support. Reboot is supported only for HikVision.
 
 ## Call History
 
@@ -108,6 +114,25 @@ For Dahua snapshots, use:
 ```
 
 API credentials are also used for snapshots, door opening, and reboot actions.
+
+For DNAKE devices with HTTP commands support, configure:
+
+```text
+door_station_vendor: dnake
+api_enabled: true
+api_host: 192.168.0.236
+api_username: admin
+api_password: change-me
+relays_count: 1
+```
+
+`api_password` is the plain admin password; the add-on sends its MD5 hash in the DNAKE unlock request:
+
+```text
+/cgi-bin/webapi.cgi?api=unlock&index=0&username=<api_username>&password=<md5(api_password)>
+```
+
+DNAKE snapshots use ONVIF `GetSnapshotUri` through the shared ONVIF snapshot provider.
 
 ## Complete Home Assistant Intercom
 

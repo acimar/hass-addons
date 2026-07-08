@@ -2,7 +2,7 @@ name: SIP Indoor Station
 slug: sip_indoor_station
 description: SIP/WebRTC bridge for SIP-capable door stations
 url: https://github.com/arturzx/hass-addons/tree/master/sip_indoor_station
-version: 0.1.24
+version: 0.1.25
 arch:
   - amd64
   - aarch64
@@ -52,7 +52,7 @@ schema:
   webrtc_ice_transport_policy: list(all|relay)
   call_history_enabled: bool
   call_history_days: int
-  door_station_vendor: list(|hikvision|dahua)
+  door_station_vendor: list(|hikvision|dahua|dnake)
   relays_count: int
   api_enabled: bool
   api_host: str
