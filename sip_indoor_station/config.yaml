@@ -2,7 +2,7 @@ name: SIP Indoor Station (Opus fork)
 slug: sip_indoor_station
 description: SIP/WebRTC bridge for door stations — fork with configurable audio codec (Opus wideband)
 url: https://github.com/acimar/hass-addons/tree/feat/audio-codec/sip_indoor_station
-version: 0.2.2
+version: 0.2.3
 arch:
   - amd64
   - aarch64
