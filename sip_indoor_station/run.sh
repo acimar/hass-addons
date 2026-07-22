@@ -39,4 +39,6 @@ export CALL_HISTORY_ENABLED="$(opt call_history_enabled)"
 export CALL_HISTORY_DAYS="$(opt call_history_days)"
 export CALL_HISTORY_DB_PATH=/data/call_history.sqlite
 
+export AUDIO_CODEC_PREFERENCE="$(opt audio_codec_preference)"
+
 exec sip-indoor-station

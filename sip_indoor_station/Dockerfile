@@ -6,6 +6,7 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 RUN apk add --no-cache \
     bash \
     jq \
+    git \
     py3-pip \
     py3-aiohttp \
     py3-gobject3 \
@@ -18,9 +19,11 @@ RUN apk add --no-cache \
     libnice-gstreamer
 
 WORKDIR /app
-COPY sip-indoor-station/ /app/sip-indoor-station/
-
-RUN pip3 install --break-system-packages --no-deps /app/sip-indoor-station
+# Install the patched core straight from the fork branch (avoids relying on
+# git submodule init during the Home Assistant add-on build).
+ARG CORE_REF=feat/configurable-audio-codec-opus
+RUN pip3 install --break-system-packages --no-deps \
+    "git+https://github.com/acimar/sip-indoor-station.git@${CORE_REF}"
 
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
