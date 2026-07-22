@@ -21,7 +21,7 @@ RUN apk add --no-cache \
 WORKDIR /app
 # Install the patched core straight from the fork branch (avoids relying on
 # git submodule init during the Home Assistant add-on build).
-ARG CORE_REF=a033585
+ARG CORE_REF=61079a8
 RUN pip3 install --break-system-packages --no-deps \
     "git+https://github.com/acimar/sip-indoor-station.git@${CORE_REF}"
 
