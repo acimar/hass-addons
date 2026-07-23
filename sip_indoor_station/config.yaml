@@ -2,7 +2,7 @@ name: SIP Indoor Station (Opus fork)
 slug: sip_indoor_station
 description: SIP/WebRTC bridge for door stations — fork with configurable audio codec (Opus wideband)
 url: https://github.com/acimar/hass-addons/tree/feat/audio-codec/sip_indoor_station
-version: 0.2.6
+version: 0.2.7
 arch:
   - amd64
   - aarch64
@@ -35,6 +35,10 @@ options:
   call_history_days: 30
   door_station_vendor: ""
   audio_codec_preference: "PCMA,PCMU"
+  audio_type: voice
+  audio_packet_loss_percentage: 15
+  rtp_jitter_buffer_ms: 60
+  rtp_clock_fix: "off"
   relays_count: 1
   api_enabled: false
   api_host: ""
@@ -55,6 +59,10 @@ schema:
   call_history_days: int
   door_station_vendor: list(|hikvision|dahua|dnake)
   audio_codec_preference: str
+  audio_type: list(voice|generic)
+  audio_packet_loss_percentage: int(0,100)
+  rtp_jitter_buffer_ms: int(0,1000)
+  rtp_clock_fix: list(off|ts6|capssetter|jbnone)
   relays_count: int
   api_enabled: bool
   api_host: str

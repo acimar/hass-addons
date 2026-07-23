@@ -41,4 +41,10 @@ export CALL_HISTORY_DB_PATH=/data/call_history.sqlite
 
 export AUDIO_CODEC_PREFERENCE="$(opt audio_codec_preference)"
 
+# Live-adjustable audio tuning (empty option => core default kicks in).
+export RTP_JITTER_BUFFER_MS="$(opt rtp_jitter_buffer_ms)"
+export OPUS_AUDIO_TYPE="$(opt audio_type)"
+export OPUS_PACKET_LOSS_PERCENTAGE="$(opt audio_packet_loss_percentage)"
+export RTP_CLOCK_FIX="$(opt rtp_clock_fix)"
+
 exec sip-indoor-station
